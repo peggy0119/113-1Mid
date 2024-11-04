@@ -1,12 +1,12 @@
 # 期中考
 >
->學號：1234567
+>學號：112112105
 ><br />
->姓名：王小明
+>姓名：李佩琪
 ><br />
->作業撰寫時間：180 (mins，包含程式撰寫時間)
+>作業撰寫時間：60 (mins，包含程式撰寫時間)
 ><br />
->最後撰寫文件日期：2023/09/22
+>最後撰寫文件日期：2024/11/04
 >
 
 本份文件包含以下主題：(至少需下面兩項，若是有多者可以自行新增)
@@ -55,21 +55,52 @@ public void mt_getResult(){
 a. 小題
 
 Ans
-
+```py
+#生成一個整數2維陣列大小為10x10，名稱為map
+map = np.zeros((10, 10), dtype=int)
+```
 b. 小題
 
 Ans
-
+```py
+#生成一個整數1維陣列大小為10，名稱為rowMap
+rowMap = np.zeros(10, dtype=int)
+```
 c. 小題
 
 Ans
-
-
+```py
+#設定rowMap的值
+rowMap = np.array([0, 7, 13, 28, 44, 62, 74, 75, 87, 90])
+```
 d. 小題
 
 Ans
-
-
+```py
+#在map中對應rowMap裡面的值標記炸彈
+for index in rowMap:
+    row, col = divmod(index, 10)  # 將一維索引轉為二維索引
+    map[row, col] = -1  # 使用-1來表示炸彈
+```
 e. 小題
 
 Ans
+```py
+#統計炸彈周圍的數量
+def count_bombs(map):
+    rows, cols = map.shape
+    bomb_map = np.zeros((rows, cols), dtype=int)
+    
+    for r in range(rows):
+        for c in range(cols):
+            if map[r, c] == -1:  # 如果是炸彈
+                bomb_map[r, c] = -1  # 標記為炸彈
+            else:
+                # 統計周圍炸彈的數量
+                for i in range(-1, 2):
+                    for j in range(-1, 2):
+                        if 0 <= r + i < rows and 0 <= c + j < cols:
+                            if map[r + i, c + j] == -1:
+                                bomb_map[r, c] += 1
+    return bomb_map
+```
